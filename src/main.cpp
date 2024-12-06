@@ -18,6 +18,8 @@ int servoSpeeds[6] = {1, 1, 1, 1, 1, 1}; // Adjust speed as needed
 // Servo pins
 const int servoPins[6] = {3, 5, 6, 9, 10, 11}; // Connect your servos to these pins
 
+
+
 bool updateServoPositions();
 void setServoAngle(int index, int angle);
 void grab_box1();
@@ -25,6 +27,8 @@ void grab_box2();
 void grab_box3();
 
 void setup() {
+
+  Serial.begin(9600);
   // Attach servos to pins
   servo1.attach(servoPins[0]);
   servo2.attach(servoPins[1]);
@@ -42,11 +46,24 @@ void setup() {
 
   delay(500); // Optional: Add a small delay for stability
 
-  grab_box3();
+  // Set up button pins as inputs
+  pinMode(A0,INPUT);
 }
 
 void loop() {
+  Serial.println(analogRead(A0));
+  // Check which button is pressed and call the respective function
+  if (analogRead(A0) < 20) { // Button 2 pressed
+    
+  } else if (analogRead(A0) < 512) { // Button 3 pressed
+    grab_box1();
+  } else if (analogRead(A0) < 1000) { // Button 3 pressed
+    grab_box2();
+  } else{ // Button 3 pressed
+    grab_box3();
+  }
 
+  delay(100); // Small delay to debounce the buttons
 }
 
 bool updateServoPositions() {
