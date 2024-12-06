@@ -42,7 +42,7 @@ void setup() {
 
   delay(500); // Optional: Add a small delay for stability
 
-  grab_box1();
+  grab_box3();
 }
 
 void loop() {
@@ -86,10 +86,10 @@ void setServoAngle(int index, int angle) {
 void grab_box1(){
 
   delay(2000);
-  targetAngles[0] = InitFixedAngles[0] - 19.89;
-  targetAngles[1] = InitFixedAngles[1] - 52.29;
-  targetAngles[2] = InitFixedAngles[2] + 61.4;
-  targetAngles[3] = InitFixedAngles[3] - 49.68;
+  targetAngles[0] = InitFixedAngles[0] - 14;
+  targetAngles[1] = InitFixedAngles[1] - 16.15;
+  targetAngles[2] = InitFixedAngles[2] + 40;
+  targetAngles[3] = InitFixedAngles[3] - 65.82;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
@@ -97,44 +97,44 @@ void grab_box1(){
 
   // Wait until movement completes
   // Step 1: Move to the box's location (picking position)
-  targetAngles[0] = InitFixedAngles[0] - 19.88;
-  targetAngles[1] = InitFixedAngles[1] - 74.24;
-  targetAngles[2] = InitFixedAngles[2] + 48.61;
-  targetAngles[3] = InitFixedAngles[3] - 10;
+  targetAngles[0] = InitFixedAngles[0] - 14;
+  targetAngles[1] = InitFixedAngles[1] - 45.58;
+  targetAngles[2] = InitFixedAngles[2] - 6.38;
+  targetAngles[3] = InitFixedAngles[3] + 9.96;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions()); // Wait until movement completes
 
   delay(500); // Optional: Add a small delay for stability
 
   // Step 2: Grab the box (close gripper)
-  targetAngles[5] = 180;
+  targetAngles[5] = 170;
   while (!updateServoPositions());
 
   delay(500); // Optional: Add a small delay for gripping
 
-  targetAngles[0] = InitFixedAngles[0] - 19.89;
-  targetAngles[1] = InitFixedAngles[1] - 52.29;
-  targetAngles[2] = InitFixedAngles[2] + 61.4;
-  targetAngles[3] = InitFixedAngles[3] - 49.68;
+  targetAngles[0] = InitFixedAngles[0] - 14;
+  targetAngles[1] = InitFixedAngles[1] - 16.15;
+  targetAngles[2] = InitFixedAngles[2] + 40;
+  targetAngles[3] = InitFixedAngles[3] - 65.82;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
   delay(500);
 
-  targetAngles[0] = InitFixedAngles[0] + 19.89;
-  targetAngles[1] = InitFixedAngles[1] - 52.29;
-  targetAngles[2] = InitFixedAngles[2] + 61.4;
-  targetAngles[3] = InitFixedAngles[3] - 49.68;
+  targetAngles[0] = InitFixedAngles[0] + 14;
+  targetAngles[1] = InitFixedAngles[1] - 16.15;
+  targetAngles[2] = InitFixedAngles[2] + 40;
+  targetAngles[3] = InitFixedAngles[3] - 65.82;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
   delay(500);
 
   // Step 4: Move to the box's destination (placing position)
-  targetAngles[0] = InitFixedAngles[0] + 19.88;
-  targetAngles[1] = InitFixedAngles[1] - 74.24;
-  targetAngles[2] = InitFixedAngles[2] + 48.61;
-  targetAngles[3] = InitFixedAngles[3] - 10;
+  targetAngles[0] = InitFixedAngles[0] + 14;
+  targetAngles[1] = InitFixedAngles[1] - 45.58;
+  targetAngles[2] = InitFixedAngles[2] - 6.38;
+  targetAngles[3] = InitFixedAngles[3] + 9.96;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
@@ -146,10 +146,10 @@ void grab_box1(){
 
   delay(500);
 
-  targetAngles[0] = InitFixedAngles[0] + 19.89;
-  targetAngles[1] = InitFixedAngles[1] - 52.29;
-  targetAngles[2] = InitFixedAngles[2] + 61.4;
-  targetAngles[3] = InitFixedAngles[3] - 49.68;
+  targetAngles[0] = InitFixedAngles[0] + 14;
+  targetAngles[1] = InitFixedAngles[1] - 16.15;
+  targetAngles[2] = InitFixedAngles[2] + 40;
+  targetAngles[3] = InitFixedAngles[3] - 65.82;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
@@ -165,6 +165,16 @@ void grab_box1(){
 }
 
 void grab_box2() {
+
+  targetAngles[0] = InitFixedAngles[0] - 26.34;
+  targetAngles[1] = InitFixedAngles[1] + 9.23;
+  targetAngles[2] = InitFixedAngles[2] - 10.69;
+  targetAngles[3] = InitFixedAngles[3] - 40.55;
+  targetAngles[4] = InitFixedAngles[4];
+  while (!updateServoPositions()); // Wait until movement completes
+
+  delay(500);
+
   // Step 1: Move to the box's location (picking position)
   targetAngles[0] = InitFixedAngles[0] - 35.71;
   targetAngles[1] = InitFixedAngles[1] - 42.94;
@@ -176,27 +186,35 @@ void grab_box2() {
   delay(500); // Optional: Add a small delay for stability
 
   // Step 2: Grab the box (close gripper)
-  targetAngles[5] = 180;
+  targetAngles[5] = 170;
   while (!updateServoPositions());
 
   delay(500); // Optional: Add a small delay for gripping
 
-  targetAngles[3] = InitFixedAngles[3] + 30;
-  while (!updateServoPositions());
+  targetAngles[0] = InitFixedAngles[0] - 26.34;
+  targetAngles[1] = InitFixedAngles[1] + 9.23;
+  targetAngles[2] = InitFixedAngles[2] - 10.69;
+  targetAngles[3] = InitFixedAngles[3] - 40.55;
+  targetAngles[4] = InitFixedAngles[4];
+  while (!updateServoPositions()); // Wait until movement completes
 
-  delay(500); // Optional: Add a small delay for gripping
+  delay(500); // Optional: Add a small delay for stability
+
+  targetAngles[0] = InitFixedAngles[0] + 26.34;
+  targetAngles[1] = InitFixedAngles[1] + 9.23;
+  targetAngles[2] = InitFixedAngles[2] - 10.69;
+  targetAngles[3] = InitFixedAngles[3] - 40.55;
+  targetAngles[4] = InitFixedAngles[4];
+  while (!updateServoPositions()); // Wait until movement completes
+
+  delay(500); // Optional: Add a small delay for stability
 
   // Step 4: Move to the box's destination (placing position)
   targetAngles[0] = InitFixedAngles[0] + 35.71;
   targetAngles[1] = InitFixedAngles[1] - 42.94;
   targetAngles[2] = InitFixedAngles[2] - 11.13;
-  targetAngles[3] = InitFixedAngles[3] + 30;
-  targetAngles[4] = InitFixedAngles[4];
-  while (!updateServoPositions());
-
-  delay(500);
-
   targetAngles[3] = InitFixedAngles[3] + 12.06;
+  targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
   delay(500);
@@ -207,10 +225,14 @@ void grab_box2() {
 
   delay(500);
 
-  targetAngles[3] = InitFixedAngles[3] + 40;
-  while (!updateServoPositions());
+  targetAngles[0] = InitFixedAngles[0] + 26.34;
+  targetAngles[1] = InitFixedAngles[1] + 9.23;
+  targetAngles[2] = InitFixedAngles[2] - 10.69;
+  targetAngles[3] = InitFixedAngles[3] - 40.55;
+  targetAngles[4] = InitFixedAngles[4];
+  while (!updateServoPositions()); // Wait until movement completes
 
-  delay(500);
+  delay(500); // Optional: Add a small delay for stability
 
   // Step 6: Return to initial position
   for (int i = 0; i < 6; i++) {
@@ -248,7 +270,7 @@ void grab_box3(){
   delay(500); // Optional: Add a small delay for stability
 
   // Step 2: Grab the box (close gripper)
-  targetAngles[5] = 180;
+  targetAngles[5] = 170;
   while (!updateServoPositions());
 
   delay(500); // Optional: Add a small delay for gripping
