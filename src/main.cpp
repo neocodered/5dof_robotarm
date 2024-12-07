@@ -4,13 +4,16 @@
 // Create servo objects for 6 servos
 Servo servo1, servo2, servo3, servo4, servo5, servo6;
 
-int InitFixedAngles[6] = {95, 90, 94, 140, 108, 125};
+//int InitFixedAngles[6] = {95, 91, 94, 140, 88, 125};
+int InitFixedAngles[6] = {92, 95, 110, 135, 88, 125};
 
 // Current angles of servos
-int currentAngles[6] = {95, 90, 94, 140, 108, 125}; // Initial positions (degrees)
+// int currentAngles[6] = {95, 91, 94, 140, 88, 125}; // Initial positions (degrees)
+int currentAngles[6] = {92, 95, 110, 135, 88, 125}; // Initial positions (degrees)
 
 // Target angles for servos
-int targetAngles[6] = {95, 90, 94, 140, 108, 125}; // Set target angles here
+//int targetAngles[6] = {95, 91, 94, 140, 88, 125}; // Set target angles here
+int targetAngles[6] = {92, 95, 110, 135, 88, 125}; // Set target angles here
 
 // Speed for each servo (degrees per update step)
 int servoSpeeds[6] = {1, 1, 1, 1, 1, 1}; // Adjust speed as needed
@@ -19,6 +22,9 @@ int servoSpeeds[6] = {1, 1, 1, 1, 1, 1}; // Adjust speed as needed
 const int servoPins[6] = {3, 5, 6, 9, 10, 11}; // Connect your servos to these pins
 
 
+#define BUTTON1 4
+#define BUTTON2 2
+#define BUTTON3 12 
 
 bool updateServoPositions();
 void setServoAngle(int index, int angle);
@@ -27,6 +33,12 @@ void grab_box2();
 void grab_box3();
 
 void setup() {
+
+  // Configure button pins as INPUT_PULLUP
+  pinMode(BUTTON1, INPUT);
+  pinMode(BUTTON2, INPUT);
+  pinMode(BUTTON3, INPUT);
+
 
   Serial.begin(9600);
   // Attach servos to pins
@@ -47,20 +59,21 @@ void setup() {
   delay(500); // Optional: Add a small delay for stability
 
   // Set up button pins as inputs
-  pinMode(A0,INPUT);
+  // pinMode(A0,INPUT);
 }
 
 void loop() {
   Serial.println(analogRead(A0));
   // Check which button is pressed and call the respective function
-  if (analogRead(A0) < 20) { // Button 2 pressed
-    
-  } else if (analogRead(A0) < 512) { // Button 3 pressed
+  if (digitalRead(BUTTON1) == LOW) { // Button 1 pressed
     grab_box1();
-  } else if (analogRead(A0) < 1000) { // Button 3 pressed
+    delay(200);    
+  } else if (digitalRead(BUTTON2) == LOW) { // Button 1 pressed
     grab_box2();
-  } else{ // Button 3 pressed
+    delay(200);
+  } else if (digitalRead(BUTTON3) == LOW) { // Button 1 pressed
     grab_box3();
+    delay(200);
   }
 
   delay(100); // Small delay to debounce the buttons
@@ -85,7 +98,7 @@ bool updateServoPositions() {
     }
   }
 
-  delay(20); // Small delay for smooth motion
+  delay(25); // Small delay for smooth motion
   return allReached;
 }
 
@@ -103,10 +116,10 @@ void setServoAngle(int index, int angle) {
 void grab_box1(){
 
   delay(2000);
-  targetAngles[0] = InitFixedAngles[0] - 14;
-  targetAngles[1] = InitFixedAngles[1] - 16.15;
-  targetAngles[2] = InitFixedAngles[2] + 40;
-  targetAngles[3] = InitFixedAngles[3] - 65.82;
+  targetAngles[0] = InitFixedAngles[0] - 14.71 + 3; //14.71
+  targetAngles[1] = InitFixedAngles[1] - 12.56;
+  targetAngles[2] = InitFixedAngles[2] - 4.4;
+  targetAngles[3] = InitFixedAngles[3] - 25.03;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
@@ -114,7 +127,7 @@ void grab_box1(){
 
   // Wait until movement completes
   // Step 1: Move to the box's location (picking position)
-  targetAngles[0] = InitFixedAngles[0] - 14;
+  targetAngles[0] = InitFixedAngles[0] - 11; //14
   targetAngles[1] = InitFixedAngles[1] - 45.58;
   targetAngles[2] = InitFixedAngles[2] - 6.38;
   targetAngles[3] = InitFixedAngles[3] + 9.96;
@@ -129,26 +142,26 @@ void grab_box1(){
 
   delay(500); // Optional: Add a small delay for gripping
 
-  targetAngles[0] = InitFixedAngles[0] - 14;
-  targetAngles[1] = InitFixedAngles[1] - 16.15;
-  targetAngles[2] = InitFixedAngles[2] + 40;
-  targetAngles[3] = InitFixedAngles[3] - 65.82;
+  targetAngles[0] = InitFixedAngles[0] - 14.71 + 3;
+  targetAngles[1] = InitFixedAngles[1] - 12.56;
+  targetAngles[2] = InitFixedAngles[2] - 4.4;
+  targetAngles[3] = InitFixedAngles[3] - 25.03;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
   delay(500);
 
-  targetAngles[0] = InitFixedAngles[0] + 14;
-  targetAngles[1] = InitFixedAngles[1] - 16.15;
-  targetAngles[2] = InitFixedAngles[2] + 40;
-  targetAngles[3] = InitFixedAngles[3] - 65.82;
+  targetAngles[0] = InitFixedAngles[0] + 14.71 + 3;
+  targetAngles[1] = InitFixedAngles[1] - 12.56;
+  targetAngles[2] = InitFixedAngles[2] - 4.4;
+  targetAngles[3] = InitFixedAngles[3] - 25.03;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
   delay(500);
 
   // Step 4: Move to the box's destination (placing position)
-  targetAngles[0] = InitFixedAngles[0] + 14;
+  targetAngles[0] = InitFixedAngles[0] + 17; //14
   targetAngles[1] = InitFixedAngles[1] - 45.58;
   targetAngles[2] = InitFixedAngles[2] - 6.38;
   targetAngles[3] = InitFixedAngles[3] + 9.96;
@@ -163,10 +176,10 @@ void grab_box1(){
 
   delay(500);
 
-  targetAngles[0] = InitFixedAngles[0] + 14;
-  targetAngles[1] = InitFixedAngles[1] - 16.15;
-  targetAngles[2] = InitFixedAngles[2] + 40;
-  targetAngles[3] = InitFixedAngles[3] - 65.82;
+  targetAngles[0] = InitFixedAngles[0] + 14.71 + 3;
+  targetAngles[1] = InitFixedAngles[1] - 12.56;
+  targetAngles[2] = InitFixedAngles[2] - 4.4;
+  targetAngles[3] = InitFixedAngles[3] - 25.03;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
 
@@ -183,7 +196,7 @@ void grab_box1(){
 
 void grab_box2() {
 
-  targetAngles[0] = InitFixedAngles[0] - 26.34;
+  targetAngles[0] = InitFixedAngles[0] - 35.71;  //26.34
   targetAngles[1] = InitFixedAngles[1] + 9.23;
   targetAngles[2] = InitFixedAngles[2] - 10.69;
   targetAngles[3] = InitFixedAngles[3] - 40.55;
@@ -208,7 +221,7 @@ void grab_box2() {
 
   delay(500); // Optional: Add a small delay for gripping
 
-  targetAngles[0] = InitFixedAngles[0] - 26.34;
+  targetAngles[0] = InitFixedAngles[0] - 35.71; //-26.34
   targetAngles[1] = InitFixedAngles[1] + 9.23;
   targetAngles[2] = InitFixedAngles[2] - 10.69;
   targetAngles[3] = InitFixedAngles[3] - 40.55;
@@ -217,7 +230,7 @@ void grab_box2() {
 
   delay(500); // Optional: Add a small delay for stability
 
-  targetAngles[0] = InitFixedAngles[0] + 26.34;
+  targetAngles[0] = InitFixedAngles[0] + 37.71; //26.34
   targetAngles[1] = InitFixedAngles[1] + 9.23;
   targetAngles[2] = InitFixedAngles[2] - 10.69;
   targetAngles[3] = InitFixedAngles[3] - 40.55;
@@ -227,7 +240,7 @@ void grab_box2() {
   delay(500); // Optional: Add a small delay for stability
 
   // Step 4: Move to the box's destination (placing position)
-  targetAngles[0] = InitFixedAngles[0] + 35.71;
+  targetAngles[0] = InitFixedAngles[0] + 37.71;
   targetAngles[1] = InitFixedAngles[1] - 42.94;
   targetAngles[2] = InitFixedAngles[2] - 11.13;
   targetAngles[3] = InitFixedAngles[3] + 12.06;
@@ -242,7 +255,7 @@ void grab_box2() {
 
   delay(500);
 
-  targetAngles[0] = InitFixedAngles[0] + 26.34;
+  targetAngles[0] = InitFixedAngles[0] + 35.71; //26.34
   targetAngles[1] = InitFixedAngles[1] + 9.23;
   targetAngles[2] = InitFixedAngles[2] - 10.69;
   targetAngles[3] = InitFixedAngles[3] - 40.55;
@@ -301,9 +314,9 @@ void grab_box3(){
 
   delay(500);
 
-  targetAngles[0] = InitFixedAngles[0] + 54.13;
+  targetAngles[0] = InitFixedAngles[0] + 58.13;
   targetAngles[1] = InitFixedAngles[1] + 15.77;
-  targetAngles[2] = InitFixedAngles[2] - 32.18;
+  targetAngles[2] = InitFixedAngles[2] - 33.18;
   targetAngles[3] = InitFixedAngles[3] - 25.59;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
@@ -311,9 +324,9 @@ void grab_box3(){
   delay(500);
 
   // Step 4: Move to the box's destination (placing position)
-  targetAngles[0] = InitFixedAngles[0] + 54.13;
+  targetAngles[0] = InitFixedAngles[0] + 58.13;
   targetAngles[1] = InitFixedAngles[1] - 36.18;
-  targetAngles[2] = InitFixedAngles[2] - 32.18;
+  targetAngles[2] = InitFixedAngles[2] - 33.18;
   targetAngles[3] = InitFixedAngles[3] + 26.36;
   targetAngles[4] = InitFixedAngles[4];
   while (!updateServoPositions());
@@ -324,9 +337,9 @@ void grab_box3(){
   targetAngles[5] = 125;
   while (!updateServoPositions());
 
-  delay(500);
+  delay(750);
 
-  targetAngles[0] = InitFixedAngles[0] + 54.13;
+  targetAngles[0] = InitFixedAngles[0] + 58.13;
   targetAngles[1] = InitFixedAngles[1] + 15.77;
   targetAngles[2] = InitFixedAngles[2] - 32.18;
   targetAngles[3] = InitFixedAngles[3] - 25.59;
