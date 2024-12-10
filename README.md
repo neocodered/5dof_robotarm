@@ -20,12 +20,12 @@ The 5-DOF robotic arm consists of:
 
 ## Denavit-Hartenberg Parameters
 
-| Joint | \(a_i\) (link length) | \(\alpha_i\) (link twist) | \(d_i\) (link offset) | \(\theta_i\) (joint angle) |
+| Joint | \(a_i\) (link length) | \($\alpha_i$) (link twist) | \(d_i\) (link offset) | \($\theta $) (joint angle)|
 |-------|-----------------------|---------------------------|-----------------------|---------------------------|
-| 1     | 0                     | \(\pi/2\)                 | 6.5                   | \(\theta_1\)              |
-| 2     | -10                   | 0                         | 0                     | \(\theta_2 + 3\pi/2\)     |
-| 3     | -14.6                 | 0                         | 0                     | \(\theta_3 + 3\pi/2\)     |
-| 4     | 0                     | \(-\pi/2\)                | -1                    | \(\theta_4 + 132^\circ\)  |
-| 5     | 0                     | 0                         | 18.2                  | \(\theta_5\)              |
+| 1     | 0                     | \(\pi/2\)                 | 6.5                   | \($\theta_1$)              |
+| 2     | -10                   | 0                         | 0                     | \($\theta_2 + 3\pi/2$)     |
+| 3     | -14.6                 | 0                         | 0                     | \($\theta_3 + 3\pi/2$)     |
+| 4     | 0                     | \(-\pi/2\)                | -1                    | \($\theta_4 + 132^\circ$)  |
+| 5     | 0                     | 0                         | 18.2                  | \($\theta_5$)              |
 
 ---
